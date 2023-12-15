@@ -16,19 +16,19 @@ def formata_tamanho(tamanho):
         texto = 'B'
     elif tamanho < mega:
         tamanho /= kilo
-        texto = 'K'
+        texto = 'Kb'
     elif tamanho < giga:
         tamanho /= mega
-        texto = 'M'
+        texto = 'Mb'
     elif tamanho < tera:
         tamanho /= giga
-        texto = 'G'
+        texto = 'Gb'
     elif tamanho < peta:
         tamanho /= tera
-        texto = 'T'
+        texto = 'Tb'
     else:
         tamanho /= peta
-        texto = 'P'
+        texto = 'Pb'
 
     tamanho = round(tamanho, 2)
     return f'{tamanho}{texto}'
