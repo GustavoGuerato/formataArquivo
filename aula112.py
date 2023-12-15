@@ -1,7 +1,38 @@
 import os
 
-caminho_procura = 'C:\\Users\\NOTE\\Downloads\\ProjetoA3_Modelagem'
-termo_procura = '1'
+caminho_procura = input('Digite um Caminho: ')
+termo_procura = input('Digite um Termo: ')
+
+
+def formata_tamanho(tamanho):
+    base = 1024
+    kilo = base
+    mega = base ** 2
+    giga = base ** 3
+    tera = base ** 4
+    peta = base ** 5
+    if tamanho < kilo:
+        tamanho = tamanho
+        texto = 'B'
+    elif tamanho < mega:
+        tamanho /= kilo
+        texto = 'K'
+    elif tamanho < giga:
+        tamanho /= mega
+        texto = 'M'
+    elif tamanho < tera:
+        tamanho /= giga
+        texto = 'G'
+    elif tamanho < peta:
+        tamanho /= tera
+        texto = 'T'
+    else:
+        tamanho /= peta
+        texto = 'P'
+
+    tamanho = round(tamanho, 2)
+    return f'{tamanho}{texto}'
+
 
 conta = 0
 for raiz, diretorios, arquivos in os.walk(caminho_procura):
@@ -19,6 +50,7 @@ for raiz, diretorios, arquivos in os.walk(caminho_procura):
                 print('Nome:', nome_arquivo)
                 print('Extensao:', ext_arquivo)
                 print('Tamanho:', tamanho)
+                print('Tamanho Formatado: ', formata_tamanho(tamanho))
             except PermissionError as e:
                 print('Sem permissão')
             except FileNotFoundError as e:
@@ -26,4 +58,4 @@ for raiz, diretorios, arquivos in os.walk(caminho_procura):
             except Exception as e:
                 print('Erro inesperado', e)
 print()
-print(f'{conta}arquivo(s) encontrado(s)')
+print(f'{conta} arquivo(s) encontrado(s)')
